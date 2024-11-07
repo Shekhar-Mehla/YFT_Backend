@@ -34,9 +34,12 @@ export const PostUsers = async (req, res) => {
 export const GetUser = async (req, res) => {
   try {
     // verify user to login step by step
+    console.log("hello word");
     const { email } = req.body;
+    console.log(email);
     // step 1. get user by email
     const User = await UserCollection.findOne({ email });
+    console.log(User);
     if (User?._id) {
       console.log("user has found now i will check passowrd");
       // step 2 compare the password using bcrypt
@@ -50,14 +53,15 @@ export const GetUser = async (req, res) => {
         const token = jwtTocken({ email });
 
         User.passwordHashed = null;
+        console.log(User + "hello i am login ");
         res.status(200).json({
           status: "success",
-          message: "you have logged i  succesfullly",
+          message: "you have333 logged i  succesfullly",
           User,
           token,
         });
-        return;
       }
+      return;
     }
     res.status(401).json({
       status: "error",
