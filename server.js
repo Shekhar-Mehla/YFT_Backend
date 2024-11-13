@@ -14,10 +14,10 @@ server.use(express.json());
 server.use(cors());
 
 server.use("/api/v1/users", UserRoute);
-server.use("/api/v1/transactions",Authmiddleware, TransactionsRoute);
+server.use("/api/v1/transactions", Authmiddleware, TransactionsRoute);
 
 server.listen(PORT, (error) => {
   error
     ? console.log(error)
-    : console.log(`server is running at http://localhost:${PORT}`);
+    : console.log(`server is running at    http://localhost:${PORT}`);
 });
