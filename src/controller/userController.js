@@ -114,13 +114,12 @@ export const forgotPassword = async (req, res) => {
 
       // step 5
       const result = emailTemplate(email, resetLink);
-    
-        res.status(200).json({
-          status: "success",
-          message:
-            "We have sent the reset password link to your email address please check your email!",
-        });
-      
+
+      res.status(200).json({
+        status: "success",
+        message:
+          "We have sent the reset password link to your email address please check your email!",
+      });
 
       return;
     }
@@ -207,12 +206,14 @@ export const resetPassword = async (req, res) => {
       if (!result) {
         const newpassword = encryptedPassword(NewPasswordHashed);
         User.passwordHashed = newpassword;
+        User.resetPasswordToken = null;
+        User.resetPasswordExpire = null;
         User.save();
-        res.status(201).json({
+        return res.status(201).json({
           status: "success",
           message: "your password is succefully updated you may login now",
         });
-        return;
+        
       }
 
       res.status(400).json({
