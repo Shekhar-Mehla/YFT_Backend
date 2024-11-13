@@ -19,6 +19,15 @@ export const UserSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
+
+    resetPasswordToken: {
+      type: String,
+      default: undefined, // Stores the reset token
+    },
+    resetPasswordExpire: {
+      type: Date,
+      default: undefined, // Stores the expiration time of the reset token
+    },
   },
   { timestamps: true }
 );
