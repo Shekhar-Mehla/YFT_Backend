@@ -177,8 +177,8 @@ export const resetPassword = async (req, res) => {
     const User = await UserCollection.findOne({
       resetPasswordToken: { $eq: authorization },
     });
-    console.log(User);
-    if (User._id) {
+
+    if (User?._id) {
       const { resetPasswordExpire, passwordHashed } = User;
       console.log(passwordHashed);
       // step 1. check token is expired or not if expired send the response
@@ -213,7 +213,6 @@ export const resetPassword = async (req, res) => {
           status: "success",
           message: "your password is succefully updated you may login now",
         });
-        
       }
 
       res.status(400).json({
@@ -247,9 +246,11 @@ export const resetPassword = async (req, res) => {
     // }
     res.status(401).json({
       status: "error",
-      message: "invalid email address check your email and try again!",
+      message:
+        "this link is invalid or already used click on forgot password link to recieve new link to your email",
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       status: "error",
       message: error.message,
