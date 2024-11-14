@@ -56,14 +56,20 @@ export const GetUser = async (req, res) => {
 
         User.passwordHashed = null;
         console.log(User + "hello i am login ");
-        res.status(200).json({
+        return res.status(200).json({
           status: "success",
-          message: "you have logged i  succesfullly",
+          message: "you have logged in  succesfullly",
           User,
           token,
         });
       }
-      return;
+      return res
+        .status(400)
+        .json({
+          status: "error",
+          message:
+            " your password is invalid check your password and try again",
+        });
     }
     res.status(401).json({
       status: "error",
