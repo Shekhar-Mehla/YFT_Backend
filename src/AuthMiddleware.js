@@ -3,7 +3,7 @@ import { UserCollection } from "../src/models/userModel/userModel.js";
 
 export const Authmiddleware = async (req, res, next) => {
   try {
-    console.log("receiver here in middleware");
+
     const { authorization } = req.headers;
     if (authorization) {
       const decode = jwt.verify(authorization, process.env.SECRET_KEY);
